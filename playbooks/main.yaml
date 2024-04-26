@@ -1,0 +1,21 @@
+# code: language=ansible
+---
+- name: Setup environment
+  hosts: localhost
+  vars:
+    package_list:
+      - shellcheck
+      - kitty
+      - fish
+      - ripgrep
+      - exa
+      - bat
+      - stow
+      - thefuck
+      - neovim
+  tasks:
+    - name: Install apt packages
+      ansible.builtin.apt:
+        name: "{{ item }}"
+        state: present
+      loop: "{{ package_list }}"
